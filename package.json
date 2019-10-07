@@ -1,0 +1,46 @@
+{
+  "name": "sunset-tutorial",
+  "version": "1.0.0",
+  "description": "This is build system for the tutorial of sunset theme using gulp.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "fix-memory-limit": "cross-env LIMIT=80192 increase-memory-limit"
+  },
+  "keywords": [
+    "sunset",
+    "tutorial",
+    "theme",
+    "wordpress",
+    "wordpress",
+    "theme"
+  ],
+  "author": "Takhribchi",
+  "license": "GPL-3.0",
+  "devDependencies": {
+    "@babel/core": "^7.6.2",
+    "@babel/preset-env": "^7.6.2",
+    "babelify": "^10.0.0",
+    "browser-sync": "^2.26.7",
+    "browserify": "^16.5.0",
+    "cross-env": "^6.0.3",
+    "gulp": "^4.0.2",
+    "gulp-autoprefixer": "^7.0.0",
+    "gulp-notify": "^3.2.0",
+    "gulp-rename": "^1.4.0",
+    "gulp-sass": "^4.0.2",
+    "gulp-sourcemaps": "^2.6.5",
+    "gulp-uglify": "^3.0.2",
+    "increase-memory-limit": "^1.0.7",
+    "vinyl-buffer": "^1.0.1",
+    "vinyl-source-stream": "^2.0.0"
+  },
+  "browserslist": [
+    "last 2 versions"
+  ],
+  "babel": {
+    "presets": [
+      "@babel/preset-env"
+    ]
+  }
+}
