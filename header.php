@@ -51,7 +51,7 @@
                                 'theme_location'    => 'primary',
                                 'container'         => false,
                                 'menu_class'        => 'nav navbar-nav',
-                                'walker'            => new Sunset_Walker_Nav_Menu()
+                                'walker'            => new Sunset_Walker_Nav_Primary()
                         ) );
                     ?>
                 </nav>
