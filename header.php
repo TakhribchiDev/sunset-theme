@@ -50,7 +50,8 @@
                         wp_nav_menu( array(
                                 'theme_location'    => 'primary',
                                 'container'         => false,
-                                'menu_class'        => 'nav navbar-nav'
+                                'menu_class'        => 'nav navbar-nav',
+                                'walker'            => new Sunset_Walker_Nav_Menu()
                         ) );
                     ?>
                 </nav>
