@@ -35,7 +35,7 @@ var imageWatch      = './img/**/*.img';
 var styleWatch      = './sass/**/*.scss';
 var jsWatch         = './js/**/*.js';
 
-var phpWatch        = ['./**/*.php', './inc/**/*.php'];
+var phpWatch        = ['./*.php', './**/*.php', './inc/**/*.php'];
 
 // Task functions
 function browser_sync() {
