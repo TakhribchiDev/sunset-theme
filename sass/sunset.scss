@@ -39,6 +39,7 @@ body { font-family: $body-font; }
 .site-description { color: #FFF; font-size: 14px; margin-top: 0.5em; }
 
 .nav-container { position: absolute; right: 0; left: 0; bottom: 0; }
+
 /*
 	Navbar
 	---------------------------------------------
@@ -46,6 +47,21 @@ body { font-family: $body-font; }
 .navbar-sunset { text-align: center; border: none; border-radius: 0; min-height: auto; margin-bottom: 0; background: rgba( 255,255,255,0.1 ); border-top: 1px solid rgba( 255,255,255,0.1 );
   ul { float: none; }
   li { float: none; display: inline-block;
+    &.active {
+      a { background: none; opacity: 1;
+        &:after { opacity: 1; @include transform( translateY(0) ); }
+      }
+    }
+    &.open {
+      a { opacity: 1; background-color: rgba(0,0,0,0.1)!important;
+        &:after { @include transform( translateY(10px) ); opacity: 0!important; }
+        &:hover,
+        &:focus,
+        &:visited { background-color: rgba(0,0,0,0.1)!important;
+          &:after { @include transform( translateY(10px) ); opacity: 0!important; }
+        }
+      }
+    }
     a { text-transform: uppercase; color: #FFF; font-size: 12px; font-weight: 500; opacity: 0.7; letter-spacing: 0.05em; background: none; @include animate( opacity, 320ms );
       &:hover,
       &:focus,
@@ -53,6 +69,16 @@ body { font-family: $body-font; }
         &:after { opacity: 1; @include transform( translateY(0) ); }
       }
       &:after { content: ''; position: absolute; right: 15px; left: 15px; bottom: 14px; height: 2px; background: #FFF; opacity: 0; @include animate( all, 320ms ); @include transform( translateY(10px) ); }
+    }
+    ul.dropdown-menu { border: 0; border-radius: 0; background: rgba(1,0,0,0.75);
+    li { display: block;
+      a { background-color: rgba(0,0,0,0);
+          &:hover,
+          &:focus,
+          &:visited { background: rgba(0,0,0,0.25)!important; color: #fff;
+        }
+        }
+    }
     }
   }
 }
