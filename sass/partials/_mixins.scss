@@ -1,3 +1,7 @@
+/*
+    Mixins
+	---------------------------------------------
+ */
 // Animate element using transition
 @mixin animate( $attr, $time ) {
   -webkit-transition: $attr $time ease;
