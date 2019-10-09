@@ -4,18 +4,7 @@
  */
 
 @import 'import/font_icon';
-
-/*
-    Variables
-	---------------------------------------------
- */
-
-$body-font: 'Raleway', 'Helvetica Neue', Arial, Verdana, sans-serif;
-
-/*
-    Mixins
-	---------------------------------------------
- */
+@import 'partials/variables';
 @import 'partials/mixins';
 
 /*
