@@ -4,8 +4,7 @@
   "description": "This is build system for the tutorial of sunset theme using gulp.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "fix-memory-limit": "cross-env LIMIT=80192 increase-memory-limit"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
     "sunset",
@@ -23,7 +22,6 @@
     "babelify": "^10.0.0",
     "browser-sync": "^2.26.7",
     "browserify": "^16.5.0",
-    "cross-env": "^6.0.3",
     "gulp": "^4.0.2",
     "gulp-autoprefixer": "^7.0.1",
     "gulp-notify": "^3.2.0",

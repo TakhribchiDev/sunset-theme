@@ -1,3 +1,4 @@
+
 /*
     Imports
 	---------------------------------------------
@@ -6,6 +7,7 @@
 @import 'import/font_icon';
 @import 'partials/variables';
 @import 'partials/mixins';
+@import 'partials/placeholders';
 
 /*
 	Generic
@@ -18,12 +20,19 @@ body { font-family: $body-font; }
 .table { display: table; height: 100%; width: 100%; }
 .table-cell { display: table-cell; height: 100%; width: 100%; vertical-align: middle; }
 
+a { @include animate( color, 320ms ); color: $primary-color;
+  &:hover,
+  &:focus {
+    text-decoration: none; color: $dark-grey;
+  }
+}
+
 /*
 	Header
 	---------------------------------------------
  */
-.header-container { position: relative; display: block; height: 326px; }
-.header-content { text-shadow: 0 1px 2px rgba(0,0,0,0.4); }
+.header-container { @extend %text-shadow; position: relative; display: block; height: 326px; }
+
 .site-title { color: #FFF; font-size: 80px; margin: 0; }
 .site-description { color: #FFF; font-size: 14px; margin-top: 0.5em; }
 
@@ -68,6 +77,114 @@ body { font-family: $body-font; }
         }
         }
     }
+    }
+  }
+}
+
+/*
+	Standard Post Format
+	---------------------------------------------
+ */
+article { margin-bottom: 80px; }
+
+h1 { font-size: 48px; font-weight: 200;
+  &.entry-title { line-height: 1.5em; margin: 40px 0 0; padding: 0;
+    &:before,
+    &:after { content: '~'; display: inline-block; position: relative; }
+    &:before { margin-right: 10px; }
+    &:after { margin-left: 10px; }
+  }
+}
+
+.entry-meta { font-size: 13px; font-weight: 200; color: $light-grey; margin-bottom: 30px;
+  a { font-weight: 500; color: $light-grey;
+    &:hover,
+    &:focus { color: $dark-grey; }
+  }
+}
+
+.standard-featured-link { display: block; position: relative;
+  &:hover,
+  &:focus {
+    .standard-featured {
+      &:after { background-color: rgba(0,0,0,0); }
+    }
+  }
+}
+.standard-featured { height: 332px; display: block; position: relative;
+  &:after {  @include animate( background-color, 320ms); content: ''; position: absolute; display: block; top: 0; right: 0; bottom: 0; left: 0; background-color: rgba(0,0,0,0.15); box-shadow: inset 0 0 15px rgba(0,0,0,0.35); }
+}
+
+.entry-excerpt { margin: 30px 0 16px;
+  p { font-size: 17px; line-height: 1.5em; font-weight: 300; letter-spacing: 0.02em; }
+}
+
+.button-container { margin-bottom: 30px; }
+.btn-sunset { @include animate( all, 320ms ); text-transform: uppercase; font-size: 14px; font-weight: 300; color: $light-grey; padding: 8px 12px; border-radius: 0; border: 1px solid $light-grey; background-color: transparent;
+  &:hover,
+  &:focus { color: #fff; border-color: $dark-grey; background-color: $dark-grey; }
+}
+
+.entry-footer { padding: 10px 5px; border-bottom: 4px solid $lighter-grey; color: $light-grey; text-transform: uppercase;
+  a { color: $light-grey; display: inline-block; padding: 0 4px; font-size: 12px;
+    &:hover,
+    &:focus { color: $dark-grey; }
+  }
+  .tags-list { margin-left: 10px;
+    .sunset-icon { margin-right: 10px; }
+    a { padding: 0 4px;}
+  }
+  .comments-link {
+    .sunset-icon { margin-left: 10px; }
+  }
+}
+
+/*
+	Standard Post Format
+	---------------------------------------------
+ */
+.sunset-format-image { margin-top: 50px;
+  .entry-header { @extend %text-shadow; height: 600px; position: relative; }
+  h1,
+  .entry-meta,
+  .entry-header { color: $white;
+    a { color: $white; }
+  }
+  h1 { padding-top: 10px; }
+}
+.entry-excerpt {
+  &.image-caption { @extend %background-gradient; position: absolute; left: 0; bottom: 0; right: 0; margin: 0;
+    p { margin: 40px 0; }
+  }
+}
+
+/*
+	Audio Post Format
+	---------------------------------------------
+ */
+.sunset-format-audio {
+  h1 { font-size: 30px;
+    &.entry-title { display: inline-block; margin-right: 20px;
+      &:before,
+      &:after { display: none; }
+    }
+  }
+  .entry-meta { display: inline-block; margin-bottom: 0; }
+
+  .entry-content {
+    iframe { width: 100%; height: 166px; }
+    audio { width: 100%; height: auto; }
+  }
+}
+
+/*
+	Video Post Format
+	---------------------------------------------
+ */
+.sunset-format-video {
+  header { margin-top: 40px;
+    h1 {
+      &.entry-title { margin-top: 20px; }
     }
   }
 }

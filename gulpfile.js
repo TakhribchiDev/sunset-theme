@@ -42,7 +42,7 @@ function browser_sync() {
     browserSync.init({
         open: false,
         injectChanges: false,
-        proxy: 'http://sunset.test/wp-admin/'
+        proxy: 'http://sunset.test/'
     });
 }
 
