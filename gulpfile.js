@@ -95,7 +95,7 @@ function js(done) {
 }
 
 function watch_files() {
-    watch( styleWatch, series( css, reload ) );
+    watch( styleWatch, css );
     watch( jsWatch, reload );
     watch( imageWatch, reload );
 

@@ -27,37 +27,37 @@
 </head>
 <body <?php body_class(); ?> >
 
-<div class="container">
+<div class="container-fluid">
 
     <div class="row">
-        <div class="col-xs-12">
 
-            <header class="header-container text-center background-image" style="background-image: url( <?php header_image(); ?> )">
-                <div class="header-content table">
-                    <div class="table-cell">
-                        <h1 class="site-title">
-                            <span class="sunset-icon sunset-logo"></span>
-                            <span class="hide"><?php bloginfo( 'name' ); ?></span>
-                        </h1>
-                        <h2 class="site-description"><?php bloginfo( 'description' ); ?></h2>
-                    </div>
+        <header class="header-container text-center background-image" style="background-image: url( <?php header_image(); ?> )">
+
+            <div class="header-content table">
+                <div class="table-cell">
+                    <h1 class="site-title">
+                        <span class="sunset-icon sunset-logo"></span>
+                        <span class="hide"><?php bloginfo( 'name' ); ?></span>
+                    </h1>
+                    <h2 class="site-description"><?php bloginfo( 'description' ); ?></h2>
                 </div>
-            </header>
+            </div>
 
             <div class="nav-container">
                 <nav class="navbar navbar-sunset">
-                    <?php
-                        wp_nav_menu( array(
-                                'theme_location'    => 'primary',
-                                'container'         => false,
-                                'menu_class'        => 'nav navbar-nav',
-                                'walker'            => new Sunset_Walker_Nav_Primary()
-                        ) );
-                    ?>
+			        <?php
+			        wp_nav_menu( array(
+				        'theme_location'    => 'primary',
+				        'container'         => false,
+				        'menu_class'        => 'nav navbar-nav',
+				        'walker'            => new Sunset_Walker_Nav_Primary()
+			        ) );
+			        ?>
                 </nav>
             </div><!-- .nav-container -->
 
-        </div><!-- .col-xs-12 -->
+        </header><!-- .header-container -->
+
     </div><!-- .row -->
 
-</div> <!-- .container -->
+</div> <!-- .container-fluid -->
