@@ -29,13 +29,12 @@ function sunset_load_more() {
 
 	if ( $archive != '0' ) {
 		$archVal = explode( '/', $archive );
-		$flipped = array_flip( $archive );
 
-		$type = ( $archVal[2] == 'category' ? 'category_name' : $archVal[3] );
+		$type = ( $archVal[1] == 'category' ? 'category_name' : $archVal[1] );
 
-		$args[ $type ] = $archVal[3];
+		$args[ $type ] = $archVal[2];
 
-		$page_trail = $archive;
+		$page_trail = '/' . $archVal[1] . '/' . $archVal[2] . '/';
 
 	} else {
 		$page_trail = '/';
@@ -45,7 +44,7 @@ function sunset_load_more() {
 
 	if ( $query->have_posts() ) :
 
-		echo '<div class="page-limit" data-page="/index.php' . $page_trail . 'page/' . $paged . '">';
+		echo '<div class="page-limit" data-page="' . $page_trail . 'page/' . $paged . '">';
 		while ( $query->have_posts() ) : $query->the_post();
 			get_template_part( 'template-parts/content', get_post_format() );
 		endwhile;
@@ -63,7 +62,7 @@ function sunset_load_more() {
 function sunset_check_paged( $num = null ) {
 	$output = '';
 
-	if ( is_paged() ) $output = 'index.php/page/' . get_query_var( 'paged' );
+	if ( is_paged() ) $output = 'page/' . get_query_var( 'paged' );
 	if ( $num == 1 ) {
 		$paged = ( get_query_var( 'paged' ) == 0 ? 1 : get_query_var( 'paged' ) );
 		return $paged;
