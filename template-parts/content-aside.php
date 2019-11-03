@@ -3,9 +3,11 @@
  * @package sunsettheme
  * -- Aside Post Format
  */
+
+$class = get_query_var( 'post-class' );
 ?>
 
-<article id="post-<?php the_ID(); ?>" <?php post_class( 'sunset-format-aside' ); ?>>
+<article id="post-<?php the_ID(); ?>" <?php post_class( array('sunset-format-aside', /* $class */) ); ?>>
 <div class="aside-container">
     <div class="row">
         <div class="col-xs-12 col-sm-3 col-md-2 text-center">

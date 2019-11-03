@@ -85,11 +85,7 @@ a { @include animate( color, 320ms ); color: $primary-color;
 	Standard Post Format
 	---------------------------------------------
  */
-article { padding-top: 40px; padding-bottom: 40px;
-  &:first-child {
-    padding-top: 80px;
-  }
-}
+article { padding-top: 40px; padding-bottom: 40px; }
 
 h1 { font-size: 48px; font-weight: 200;
   &.entry-title { line-height: 1.5em; margin: 0; padding: 0;
@@ -321,4 +317,72 @@ h1 { font-size: 48px; font-weight: 200;
     background-color: rgba(0,0,0,0.075);
     padding-right: 10px;
   }
+}
+
+/*
+	Footer Section
+	---------------------------------------------
+ */
+.sunset-footer {
+  background-color: $dark-grey;
+  padding: 20px 0;
+  margin-top: 40px;
+  display: block;
+  color: $white;
+}
+
+/*
+    Ajax Loading
+	---------------------------------------------
+ */
+.container-load-previous {
+  margin-top: 40px;
+  margin-bottom: -40px;
+}
+
+.sunset-posts-container {
+  padding-top: 40px;
+
+  article {
+    @include animate( all, 320ms );
+    @include transform( translateY( 50px ) );
+    opacity: 0;
+
+    &.reveal {
+      opacity: 1;
+      @include transform( translateY( 0 ) );
+    }
+  }
+}
+
+.btn-sunset-load {
+  display: block;
+  width: 200px;
+  color: #222;
+  font-size: 30px;
+  margin: 0 auto;
+  cursor: pointer;
+  opacity: 0.5;
+  @include animate( opacity, 320ms );
+
+  &:hover,
+  &:focus,
+  &.loading {
+    opacity: 1;
+  }
+
+  &.loading {
+    cursor: default;
+  }
+
+  span {
+    display: block;
+  }
+}
+
+.spin {
+  animation: spin;
+  animation-duration: 1000ms;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
 }
