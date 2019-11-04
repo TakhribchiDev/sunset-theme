@@ -2,21 +2,49 @@ jQuery(document).ready(function($) {
     // Custom Sunset Scripts
 
     /* Variable Declarations */
-    var last_scroll = 0;
+    let last_scroll = 0;
 
     /* Init Functions */
     revealPosts();
-    setCarouselThumbnails( '.sunset-carousel-thumb' );
+
+    /* Carousel Control */
+    $(document).on( 'click', '.sunset-carousel-thumb', function() {
+
+        let id = $( "#" + $(this).attr("id") );
+
+        $(id).on('slid.bs.carousel', function() {
+
+            sunset_get_bs_thumbs(id);
+
+        } );
+
+    } );
+
+    $(document).on( 'mouseenter', '.sunset-carousel-thumb', function() {
+
+        let id = $( "#" + $(this).attr("id") );
+        sunset_get_bs_thumbs(id);
+
+    } );
+
+    function sunset_get_bs_thumbs( id ) {
+
+        let nextThumb = $(id).find('.item.active').find( '.next-image-preview').data('image');
+        let prevThumb = $(id).find('.item.active').find( '.prev-image-preview').data('image');
+        $(id).find('.right.carousel-control').find('.thumbnail-container').css({ 'background-image' : 'url('+nextThumb+')' });
+        $(id).find('.left.carousel-control').find('.thumbnail-container').css({ 'background-image' : 'url('+prevThumb+')' });
+
+    }
 
     /* Ajax Functions */
     $(document).on( 'click', '.sunset-load-more:not(.loading)', function() {
 
-        var that = $(this);
-        var page = that.data('page');
-        var newPage = page + 1;
-        var ajaxurl = that.data('url');
-        var prev = that.data( 'prev' );
-        var archive = that.data( 'archive' );
+        let that = $(this);
+        let page = that.data('page');
+        let newPage = page + 1;
+        let ajaxurl = that.data('url');
+        let prev = that.data( 'prev' );
+        let archive = that.data( 'archive' );
 
         if ( typeof( prev ) === 'undefined' ) {
             prev = 0;
@@ -65,7 +93,6 @@ jQuery(document).ready(function($) {
                             that.find( '.sunset-icon' ).removeClass( 'spin' );
                         }
 
-                        setCarouselThumbnails( '.sunset-carousel-thumb' );
                         revealPosts();
 
                     }, 1000 );
@@ -77,7 +104,7 @@ jQuery(document).ready(function($) {
     /* Scroll Functions */
     $( window ).scroll( function() {
 
-        var scroll = $( window ).scrollTop();
+        let scroll = $( window ).scrollTop();
 
         if ( Math.abs( scroll- last_scroll ) > $( window ).height() * 0.1 ) {
             last_scroll = scroll;
@@ -94,30 +121,15 @@ jQuery(document).ready(function($) {
     } );
 
     /* Helper Functions */
-    function setCarouselThumbnails( carousel ) {
-        sunset_get_bs_thumbs(carousel);
-
-        $(carousel).on( 'slid.bs.carousel', function() {
-            sunset_get_bs_thumbs( carousel );
-        } );
-
-        function sunset_get_bs_thumbs( carousel ) {
-            var nextThumb = $('.item.active').find( '.next-image-preview').data('image');
-            var prevThumb = $('.item.active').find( '.prev-image-preview').data('image');
-            $(carousel).find('.carousel-control.right').find('.thumbnail-container').css({ 'background-image' : 'url('+nextThumb+')' });
-            $(carousel).find('.carousel-control.left').find('.thumbnail-container').css({ 'background-image' : 'url('+prevThumb+')' });
-        }
-    }
-
     function revealPosts() {
-        var posts = $('article:not(.reveal)');
-        var i = 0;
+        let posts = $('article:not(.reveal)');
+        let i = 0;
 
         setInterval( function() {
 
             if ( i >= posts.length ) return false;
 
-            var el = posts[i];
+            let el = posts[i];
             $(el).addClass('reveal').find('.sunset-carousel-thumb').carousel();
 
             i++;
@@ -125,11 +137,11 @@ jQuery(document).ready(function($) {
     }
 
     function isVisible( element ) {
-        var scroll_pos = $( window ).scrollTop();
-        var window_height = $( window ).height();
-        var el_top = $( element ).offset().top;
-        var el_height = $( element ).height();
-        var el_bottom = el_top + el_height;
+        let scroll_pos = $( window ).scrollTop();
+        let window_height = $( window ).height();
+        let el_top = $( element ).offset().top;
+        let el_height = $( element ).height();
+        let el_bottom = el_top + el_height;
 
         return ( el_bottom - el_height * 0.25 > scroll_pos ) && ( el_top < ( scroll_pos + 0.5 * window_height ) );
     }
