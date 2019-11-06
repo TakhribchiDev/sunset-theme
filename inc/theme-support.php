@@ -35,6 +35,36 @@ add_action( 'after_setup_theme', 'sunset_register_nav_menu' );
 
 add_theme_support( 'post-thumbnails' );
 
+/* Activate HTML5 features */
+add_theme_support( 'html5', array(
+	'comment-list',
+	'comment-form',
+	'search-form',
+	'gallery',
+	'caption'
+) );
+
+/*
+ * =========================
+ *    SIDEBAR FUNCTIONS
+ * =========================
+ */
+
+function sunset_sidebar_init() {
+
+	register_sidebar( array(
+		'name'          => esc_html__( 'Sunset Sidebar', 'sunsettheme' ),
+		'id'            => 'sunset-sidebar',
+		'description'   => 'Dynamic Right Sidebar',
+		'before_widget' => '<section id="%1$s" class="sunset-widget %2$s">',
+		'after_widget'  => '</section>',
+		'before_title'  => '<h2 class="sunset-widget-title">',
+		'after_title'   => '</h2>'
+	) );
+
+}
+add_action( 'widgets_init', 'sunset_sidebar_init' );
+
 /*
  * =========================
  *    BLOG LOOP CUSTOM FUNCTIONS
@@ -153,4 +183,90 @@ function sunset_grab_current_uri() {
 	$url = $referer . $_SERVER['REQUEST_URI'];
 
 	return $url;
+}
+
+/*
+ * =========================
+ *    SINGLE POST CUSTOM FUNCTIONS
+ * =========================
+ */
+
+function sunset_post_navigation() {
+
+	$nav = '<div class="row">';
+
+	$prev = get_previous_post_link( '<div class="post-link-nav"><span class="sunset-icon sunset-chevron-left"></span> %link</div>', '%title' );
+	$nav .= '<div class="col-xs-12 col-sm-6 text-left"><div class="post-link-nav">' . $prev . '</div></div>';
+
+
+	$next = get_next_post_link( '<div class="post-link-nav"></span>%link <span class="sunset-icon sunset-chevron-right"></div>', '%title' );
+	$nav .= '<div class="col-xs-12 col-sm-6 text-right"><div class="post-link-nav">' . $next . '</div></div>';
+
+	$nav .= '</div>';
+
+	return $nav;
+}
+
+function sunset_share_this( $content ) {
+
+	if ( is_single() ) {
+
+		$title = get_the_title();
+		$permalink = get_permalink();
+
+		$twitter_handler = ( get_option( 'twitter_handler' ) ? '&amp;via=' . esc_attr( get_option( 'twitter_handler' ) ) : '' );
+
+		$twitter = 'https://twitter.com/intetnt/tweet?text=Hey Read this: ' . $title . '&amp;url=' . $permalink . $twitter_handler;
+		$facebook = 'https://www.facebook.com/sharer/sharer.php?u=' . $permalink;
+		$google = 'https://plus.google.com/share?url=' . $permalink;
+
+		$content .='<div class="sunset-shareThis"><h4>Share This</h4>';
+		$content .= '<ul>';
+		$content .= '<li><a href="' . $twitter . '" target="_blank" rel="nofollow"><span class="sunset-icon sunset-twitter"></span></a></li>';
+		$content .= '<li><a href="' . $facebook . '" target="_blank" rel="nofollow"><span class="sunset-icon sunset-facebook"></span></a></li>';
+		$content .= '<li><a href="' . $google . '" target="_blank" rel="nofollow"><span class="sunset-icon sunset-googleplus"></span></a></li>';
+		$content .= '</ul></div><!-- .shareThis -->';
+
+		return $content;
+
+	} else {
+
+		return $content;
+
+	}
+}
+add_filter( 'the_content', 'sunset_share_this' );
+
+function sunset_get_post_navigation() {
+
+	//if ( get_comment_pages_count() > 1 && get_option( 'page_comments' ) ) :
+
+		require ( get_template_directory() . '/inc/templates/sunset-comment-nav.php' );
+
+	//endif;
+
+}
+
+function sunset_comment_form() {
+
+	$commenter = wp_get_current_commenter();
+	$consent = empty( $commenter['comment_author_email'] ) ? '' : ' checked="checked"';
+
+	$fields = array(
+		'author' => '<div class="form-group"><label for="author">' . __( 'Name', 'sunsettheme' ) .
+		            '</label> <span class="required">*</span> <input id="author" name="author" type="text" class="form-control" value="' . esc_attr( $commenter['comment_author'] ) . '" required="required"/></div>',
+		'email' => '<div class="form-group"><label for="email">' . __( 'Email', 'sunset-theme' ) .
+		           '<span class="required">*</span> </label> <input id="email" name="email" type="text" class="form-control" value="' . esc_attr(  $commenter['comment_author_email'] ) . '" required="required" /></div>',
+		'url' => '<div class="form-group"><label for="url">' . __( 'Website', 'sunsettheme' ) . '</label> <input id="url" name="url" type="text" class="form-control" value="' . esc_attr( $commenter['comment_author_url'] ) . '"/></div>',
+		'cookies' => '<div class="form-group form-check"><input id="wp-comment-cookies-consent" name="wp-comment-cookies-consent" type="checkbox" class="form-check-input" value="yes"' . $consent . ' /> <label class="form-check-label" for="wp-comment-cookies-consent">' . __( 'Save my info for future comments.' ) . '</label></div>'
+	);
+
+	$args = array(
+		'class_submit' => 'btn btn-block btn-lg btn-warning',
+		'label_submit' => __('Submit Comment'),
+		'comment_field' => '<div class="form-group"><label for="comment">' . _x( 'Comment', 'noun' ) . '</label><textarea id="comment" class="form-control" name="comment" rows="4" aria-required="true" required="required"></textarea></div>',
+		'fields'       => apply_filters( 'comment_form_default_fields', $fields )
+	);
+	comment_form( $args );
+
 }

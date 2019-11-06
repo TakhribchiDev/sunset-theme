@@ -27,6 +27,16 @@
 </head>
 <body <?php body_class(); ?> >
 
+<div class="sunset-sidebar">
+
+    <div class="sidebar-scroll">
+
+        <?php get_sidebar(); ?>
+
+    </div><!-- .sidebar-scroll -->
+
+</div><!-- .sunset-sidebar -->
+
 <div class="container-fluid">
 
     <div class="row">

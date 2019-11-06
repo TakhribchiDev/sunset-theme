@@ -1,21 +1,10 @@
-/*
-    Variables
-	---------------------------------------------
- */
-
-$icon-font: 'sunset-icon';
-
-/*
-    Font Icon
-	---------------------------------------------
- */
 @font-face {
-  font-family: $icon-font;
-  src:  url('../fonts/sunset-icon.eot?fn1rot');
-  src:  url('../fonts/sunset-icon.eot?fn1rot#iefix') format('embedded-opentype'),
-        url('../fonts/sunset-icon.ttf?fn1rot') format('truetype'),
-        url('../fonts/sunset-icon.woff?fn1rot') format('woff'),
-        url('../fonts/sunset-icon.svg?fn1rot#sunset-icon') format('svg');
+  font-family: 'sunset-icon';
+  src:  url('../fonts/sunset-icon.eot?mla39b');
+  src:  url('../fonts/sunset-icon.eot?mla39b#iefix') format('embedded-opentype'),
+  url('../fonts/sunset-icon.ttf?mla39b') format('truetype'),
+  url('../fonts/sunset-icon.woff?mla39b') format('woff'),
+  url('../fonts/sunset-icon.svg?mla39b#sunset-icon') format('svg');
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -36,48 +25,57 @@ $icon-font: 'sunset-icon';
   -moz-osx-font-smoothing: grayscale;
 }
 
-.sunset-audio:before {
-  content: "\e900";
-}
-.sunset-chevron-left:before {
+.sunset-facebook:before {
   content: "\e901";
 }
-.sunset-chevron-right:before {
+.sunset-googleplus:before {
   content: "\e902";
 }
-.sunset-close:before {
+.sunset-twitter:before {
+  content: "\e900";
+}
+.sunset-audio:before {
   content: "\e903";
 }
-.sunset-comment:before {
+.sunset-chevron-left:before {
   content: "\e904";
 }
-.sunset-link:before {
+.sunset-chevron-right:before {
   content: "\e905";
 }
-.sunset-loading:before {
+.sunset-close:before {
   content: "\e906";
 }
-.sunset-logo:before {
+.sunset-comment:before {
   content: "\e907";
 }
-.sunset-menu:before {
+.sunset-link:before {
   content: "\e908";
 }
-.sunset-pencil:before {
+.sunset-loading:before {
   content: "\e909";
 }
-.sunset-pics:before {
+.sunset-logo:before {
   content: "\e90a";
 }
-.sunset-search:before {
+.sunset-menu:before {
   content: "\e90b";
 }
-.sunset-share:before {
+.sunset-pencil:before {
   content: "\e90c";
 }
-.sunset-tag:before {
+.sunset-pics:before {
   content: "\e90d";
 }
-.sunset-video:before {
+.sunset-search:before {
   content: "\e90e";
+}
+.sunset-share:before {
+  content: "\e90f";
+}
+.sunset-tag:before {
+  content: "\e910";
+}
+.sunset-video:before {
+  content: "\e911";
 }

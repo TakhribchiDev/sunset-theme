@@ -122,6 +122,11 @@ jQuery(document).ready(function($) {
 
     /* Helper Functions */
     function revealPosts() {
+
+        // Enable tooltips and popovers in posts content
+        $('[data-toggle="tooltip"]').tooltip();
+        $('[data-toggle="popover"]').popover();
+
         let posts = $('article:not(.reveal)');
         let i = 0;
 
