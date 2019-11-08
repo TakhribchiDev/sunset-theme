@@ -8,13 +8,20 @@
 @import 'partials/variables';
 @import 'partials/mixins';
 @import 'partials/placeholders';
-@import 'partials/wordpress';
+@import 'partials/wordpress'; // wordpress default classes
+
+@import 'admin/sidebar'; // admin classes
 
 /*
 	Generic
 	---------------------------------------------
  */
-body { font-family: $body-font; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+body { font-family: $body-font; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+
+  &.no-scroll {
+    overflow-y: hidden;
+  }
+}
 
 .background-image { background-position: center center; background-size: cover; background-repeat: no-repeat; }
 
@@ -410,12 +417,12 @@ h1 { font-size: 48px; font-weight: 200;
     .sunset-tooltip,
     .sunset-popover {
 
-      color: #ff9d1d;
+      color: $orange;
       cursor: pointer;
 
       &:hover,
       &:focus {
-        color: #f56b08;
+        color: $orange-hover;
       }
 
     }
@@ -592,9 +599,21 @@ a.comment-reply-link {
 }
 
 /*
-    Comment section
+    Sidebar section
 	---------------------------------------------
  */
+.sidebar-overlay {
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  position: fixed;
+  background-color: rgba(0,0,0,0.3);
+  z-index: 3;
+  display: none;
+  cursor: col-resize;
+}
+
 .sunset-sidebar {
   position: fixed;
   color: #fff;
@@ -606,4 +625,158 @@ a.comment-reply-link {
   z-index: 9;
   width: 100%;
   max-width: 280px;
+  @include animate( transform, 320ms );
+
+  &.sidebar-closed {
+    @include transform( translateX( 100% ) );
+  }
+
+  a {
+    color: #bababa;
+
+    &:hover,
+    &:focus {
+      color: #fff;
+    }
+  }
+
+}
+
+.sunset-sidebar-container {
+  padding-top: 40px;
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.sidebar-scroll {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+
+.sidebar-close,
+.sidebar-open {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  color: #fff;
+  cursor: pointer;
+
+  &:hover,
+  &:focus {
+    color: $orange-hover;
+  }
+}
+
+.sidebar-open {
+  left: auto;
+  top: 20px;
+  right: 20px;
+  font-size: 10px;
+}
+
+/*
+	Widgets section
+	---------------------------------------------
+ */
+.sunset-widget {
+  margin: 20px 0 40px;
+  padding: 0 20px;
+
+  ul {
+    list-style: none;
+    padding-left: 10px;
+  }
+}
+
+h2.sunset-widget-title {
+  display: block;
+  text-align: center;
+  font-size: 15px;
+  font-weight: 300;
+  background-color: #303030;
+  border-radius: 20px;
+  padding: 8px;
+  line-height: 1em;
+  margin-bottom: 20px;
+  letter-spacing: 0.04em;
+}
+
+// Tags cloud widget
+.tagcloud {
+  text-align: center;
+  a {
+    display: inline-block;
+    background-color: #7d7d7d;
+    padding: 1px 9px;
+    border-radius: 10px;
+    color: #eee;
+  }
+}
+
+// Categories widget
+.cat-item {
+  position: relative;
+
+  a,
+  span {
+    display: block;
+    line-height: 1em;
+  }
+
+  a {
+    padding: 4px 0;
+  }
+
+  span {
+    position: absolute;
+    right: 0;
+    top: 2px;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 2px 7px 5px;
+    background-color: #7D7D7D;
+    border-radius: 10px;
+  }
+}
+
+// Comments widget
+.recentcomments {
+
+  font-size: 10px;
+  color: #ccc;
+  padding: 0;
+
+  a {
+    text-transform: uppercase;
+  }
+
+  span {
+
+    &,
+    & a {
+      display: block;
+      color: #fff;
+      font-size: 14px;
+      padding-bottom: 4px;
+      margin-bottom: 2px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      text-transform: none;
+    }
+  }
+
+}
+
+// Popular Posts widget
+media {
+  position: relative;
+}
+.media-meta {
+  font-size: 12px;
 }

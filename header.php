@@ -27,21 +27,35 @@
 </head>
 <body <?php body_class(); ?> >
 
-<div class="sunset-sidebar">
+<div class="sunset-sidebar sidebar-closed"><!-- .sidebar-closed -> Add this class on production to this div -->
 
-    <div class="sidebar-scroll">
+    <div class="sunset-sidebar-container">
 
-        <?php get_sidebar(); ?>
+        <a class="js-toggleSidebar sidebar-close">
+            <span class="sunset-icon sunset-close"></span>
+        </a>
 
-    </div><!-- .sidebar-scroll -->
+        <div class="sidebar-scroll">
+
+			<?php get_sidebar(); ?>
+
+        </div><!-- .sidebar-scroll -->
+
+    </div><!-- .sunset-sidebar-container -->
 
 </div><!-- .sunset-sidebar -->
+
+<div class="sidebar-overlay js-toggleSidebar"></div>
 
 <div class="container-fluid">
 
     <div class="row">
 
         <header class="header-container text-center background-image" style="background-image: url( <?php header_image(); ?> )">
+
+            <a class="js-toggleSidebar sidebar-open">
+                <span class="sunset-icon sunset-menu"></span>
+            </a>
 
             <div class="header-content table">
                 <div class="table-cell">

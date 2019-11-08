@@ -18,6 +18,7 @@ get_header(); ?>
 
 		                while ( have_posts() ) : the_post();
 
+			                sunset_save_post_views( get_the_ID() );
 			                get_template_part( 'template-parts/single', get_post_format() );
 
 		                endwhile;
