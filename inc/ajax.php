@@ -11,6 +11,9 @@
 add_action( 'wp_ajax_nopriv_sunset_load_more', 'sunset_load_more' );
 add_action( 'wp_ajax_sunset_load_more', 'sunset_load_more' );
 
+add_action( 'wp_ajax_nopriv_sunset_save_user_contact_form', 'sunset_save_contact_form_info' );
+add_action( 'wp_ajax_sunset_save_user_contact_form', 'sunset_save_contact_form_info' );
+
 function sunset_load_more() {
 
 	$paged = $_POST['page'] + 1;
@@ -108,4 +111,37 @@ function sunset_check_paged( $num = null ) {
 	} else {
 		return $output;
 	}
+}
+
+function sunset_save_contact_form_info() {
+	$title = wp_strip_all_tags( $_POST[ 'name' ] );
+	$email = wp_strip_all_tags( $_POST[ 'email' ] );
+	$message = wp_strip_all_tags( $_POST[ 'message' ] );
+
+	$args = array(
+		'post_title'    => $title,
+		'post_content'  => $message,
+		'post_author'   => 1,
+		'post_status'   => 'publish',
+		'post_type'     => 'sunset-contact',
+		'meta_input'    => array(
+			'_contact_email_value_key' => $email
+		)
+	);
+
+	$postID = wp_insert_post( $args );
+	if ( $postID !== 0 ) {
+		$to = get_bloginfo( 'admin_email' );
+		$subject = 'Sunset Contact Form - ' . $title;
+		$headers[] = 'From: ' . get_bloginfo( 'name' ) . ' <' . $to . '>';
+		$headers[] = 'Reply-To: ' . $title . ' <' . $email . '>';
+		$headers[] = 'Content-Type: text/html: charset=UTF-8';
+		wp_mail( $to, $subject, $message, $headers );
+		echo $postID;
+	} else {
+		echo 0;
+	}
+
+	echo $postID;
+	die();
 }

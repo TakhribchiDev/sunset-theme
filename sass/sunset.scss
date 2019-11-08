@@ -39,7 +39,15 @@ a { @include animate( color, 320ms ); color: $primary-color;
 	Header
 	---------------------------------------------
  */
-.header-container { @extend %text-shadow; position: relative; display: block; height: 326px; }
+.header-container {
+  @extend %text-shadow;
+  position: relative;
+  display: block;
+  height: 326px;
+  @media ( max-width: $xs ) {
+    height: 200px;
+  }
+}
 
 .site-title { color: #FFF; font-size: 80px; margin: 0; }
 .site-description { color: #FFF; font-size: 14px; margin-top: 0.5em; }
@@ -50,7 +58,7 @@ a { @include animate( color, 320ms ); color: $primary-color;
 	Navbar
 	---------------------------------------------
  */
-.navbar-sunset { text-align: center; border: none; border-radius: 0; min-height: auto; margin-bottom: 0; background: rgba( 255,255,255,0.1 ); border-top: 1px solid rgba( 255,255,255,0.1 );
+.navbar-sunset { text-align: center; border: none; border-radius: 0; min-height: auto; margin-bottom: 0; background: rgba( 255,255,255,0.1 ); border-top: 1px solid rgba( 255,255,255,0.1 ); padding: 0 15px;
   ul { float: none; }
   li { float: none; display: inline-block;
     &.active {
@@ -93,7 +101,12 @@ a { @include animate( color, 320ms ); color: $primary-color;
 	Standard Post Format
 	---------------------------------------------
  */
-article { padding-top: 40px; padding-bottom: 40px; }
+article { padding-top: 40px; padding-bottom: 40px;
+  @media ( max-width: $xs ) {
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+}
 
 h1 { font-size: 48px; font-weight: 200;
   &.entry-title { line-height: 1.5em; margin: 0; padding: 0;
@@ -101,6 +114,10 @@ h1 { font-size: 48px; font-weight: 200;
     &:after { content: '~'; display: inline-block; position: relative; }
     &:before { margin-right: 10px; }
     &:after { margin-left: 10px; }
+
+    @media ( max-width: $xs ) {
+      font-size: 26px ;
+    }
   }
 }
 
@@ -121,6 +138,10 @@ h1 { font-size: 48px; font-weight: 200;
 }
 .standard-featured { height: 400px; display: block; position: relative;
   &:after {  @include animate( background-color, 320ms); content: ''; position: absolute; display: block; top: 0; right: 0; bottom: 0; left: 0; background-color: rgba(0,0,0,0.15); box-shadow: inset 0 0 15px rgba(0,0,0,0.35); }
+
+  @media ( max-width: $xs ) {
+    height: 220px ;
+  }
 }
 
 .entry-excerpt { margin: 30px 0 16px;
@@ -152,7 +173,11 @@ h1 { font-size: 48px; font-weight: 200;
 	---------------------------------------------
  */
 .sunset-format-image {
-  .entry-header { @extend %text-shadow; height: 600px; position: relative; }
+  .entry-header { @extend %text-shadow; height: 600px; position: relative;
+    @media ( max-width: $xs ) {
+      height: 220px ;
+    }
+  }
   h1,
   .entry-meta,
   .entry-header { color: $white;
@@ -204,6 +229,9 @@ h1 { font-size: 48px; font-weight: 200;
 .sunset-format-gallery {
   .standard-featured { height: 500px;
     &:after {  background-color: transparent; }
+    @media ( max-width: $xs ) {
+      height: 220px ;
+    }
   }
 
   .carousel-control { background: none; opacity: 1; filter: alpha(opacity=100); font-size: 30px; width: auto; @extend %text-shadow;
@@ -253,6 +281,10 @@ h1 { font-size: 48px; font-weight: 200;
     &:after { display: inline-block; position: relative; font-size: 50px; font-weight: bold; color: $lighter-grey; }
     &:before { content: '“'; }
     &:after { content: '„'; }
+
+    @media ( max-width: $xs ) {
+      font-size: 26px ;
+    }
   }
 
   .quote-author {
@@ -748,7 +780,6 @@ h2.sunset-widget-title {
 
 // Comments widget
 .recentcomments {
-
   font-size: 10px;
   color: #ccc;
   padding: 0;
@@ -758,7 +789,6 @@ h2.sunset-widget-title {
   }
 
   span {
-
     &,
     & a {
       display: block;
@@ -770,7 +800,6 @@ h2.sunset-widget-title {
       text-transform: none;
     }
   }
-
 }
 
 // Popular Posts widget
@@ -779,4 +808,99 @@ media {
 }
 .media-meta {
   font-size: 12px;
+}
+
+// Contact form
+.sunset-form-control {
+  resize: vertical;
+  border: none;
+  border-radius: 0;
+  padding: 8px 15px;
+  outline: none;
+  box-shadow: none !important;
+  -webkit-box-shadow: none !important;
+
+  &::-webkit-input-placeholder {
+     text-transform: uppercase;
+   }
+  &::-moz-placeholder {
+    text-transform: uppercase;
+  }
+  &::-ms-input-placeholder {
+    text-transform: uppercase;
+  }
+  &:-moz-placeholder {
+     text-transform: uppercase;
+   }
+
+  &:hover,
+  &:focus,
+  &:active {
+    box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+  }
+}
+
+.btn-sunset-form {
+  background-color: $grey;
+  border-radius: 2px;
+  font-size: 26px;
+  padding: 20px 60px;
+  color: #fff;
+  font-weight: 100;
+  border: none;
+  @include animate( all, 320ms );
+
+  &:hover,
+  &:focus {
+    background-color: $dark-grey;
+    color: #fff;
+  }
+}
+
+.sunset-contact-form {
+  padding: 40px 0;
+  max-width: 500px;
+  width: 100%;
+  margin: 0 auto;
+
+  .form-group {
+    margin-bottom: 30px;
+    position: relative;
+
+    &:before {
+      position: absolute;
+      display: block;
+      content: '';
+
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background-color: $grey2;
+    }
+
+    .form-control-msg {
+      text-transform: uppercase;
+      font-weight: 500;
+      font-size: 10px;
+    }
+    &.has-error {
+      &:before {
+        background-color: #a94442;
+      }
+    }
+  }
+}
+
+.form-control-msg {
+  display: none;
+}
+.has-error {
+  .form-control-msg {
+    display: block;
+  }
+}
+.js-show-feedback {
+  display: block;
 }

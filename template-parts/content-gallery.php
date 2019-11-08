@@ -3,12 +3,15 @@
  * @package sunsettheme
  * -- Gallery Post Format
  */
+
+global $detect;
+
 ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class( 'sunset-format-gallery' ); ?>>
 	<header class="entry-header text-center">
 
-		<?php if ( sunset_get_attachment() ): ?>
+		<?php if ( sunset_get_attachment() &&  !$detect->isMobile() && !$detect->isTablet() ): ?>
 
            <div id="post-gallery-<?php the_ID() ?>" class="carousel slide sunset-carousel-thumb" data-ride="carousel">
                 <div class="carousel-inner" role="listbox">
@@ -69,6 +72,14 @@
 	</header>
 
 	<div class="entry-content">
+
+		<?php if ( sunset_get_attachment() && ( $detect->isMobile() || $detect->isTablet() ) ):
+			?>
+            <a class="standard-featured-link" href="<?php the_permalink(); ?>">
+                <div class="standard-featured background-image" style="background-image: url(<?php echo sunset_get_attachment(); ?>);"></div>
+            </a>
+		<?php endif; ?>
+
         <div class="entry-excerpt">
             <?php the_excerpt(); ?>
         </div><!-- .entry-excerpt -->

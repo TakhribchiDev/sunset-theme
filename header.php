@@ -67,7 +67,7 @@
                 </div>
             </div>
 
-            <div class="nav-container">
+            <div class="nav-container hidden-xs">
                 <nav class="navbar navbar-sunset">
 			        <?php
 			        wp_nav_menu( array(

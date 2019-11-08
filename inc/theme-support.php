@@ -268,5 +268,22 @@ function sunset_comment_form() {
 		'fields'       => apply_filters( 'comment_form_default_fields', $fields )
 	);
 	comment_form( $args );
-
 }
+
+// Mail server information
+function mailtrap($phpmailer) {
+	$phpmailer->isSMTP();
+	$phpmailer->Host = 'smtp.mailtrap.io';
+	$phpmailer->SMTPAuth = true;
+	$phpmailer->Port = 2525;
+	$phpmailer->Username = '34ea74a28e27c2';
+	$phpmailer->Password = '8bd8cac529c5d2';
+}
+add_action('phpmailer_init', 'mailtrap');
+
+// Initialize global mobile detect
+function mobileDetectGlobal() {
+	global $detect;
+	$detect = new Mobile_Detect();
+}
+add_action( 'after_setup_theme', 'mobileDetectGlobal' );
